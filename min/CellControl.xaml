@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="min.CellControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:min"
+             mc:Ignorable="d"
+             d:DesignHeight="50"
+             d:DesignWidth="50"
+             Width="50"
+             Height="50"
+             BorderBrush="Black"
+             BorderThickness="1"
+             IsEnabled="True">
+    <UserControl.Resources>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter"></local:InverseBooleanConverter>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        </Grid.Resources>
+        <TextBlock Name="tblock"
+                   Background="#FFFFC0C0"
+                   FontSize="32"
+                   TextAlignment="Center"
+                   Text="{Binding Value}"
+                   MouseLeftButtonDown="tblock_MouseLeftButtonDown"
+                   IsEnabled="{Binding Path=IsOpen, Converter={StaticResource InverseBooleanConverter}}">
+        </TextBlock>
+        <Button Visibility="{Binding IsClosed, Converter={StaticResource BoolToVisConverter}}"
+          Content="{Binding BValue}"
+                Click="Button_Click"
+                MouseDown="Button_MouseDown"></Button>
+    </Grid>
+    
+</UserControl>
